@@ -21,14 +21,15 @@ define nagios::service (
 
   $real_name = "${::hostname}_${name}"
 
-  @@nagios_service { "${real_name}":
-    ensure => $ensure,
-    notify => Service[nagios];
-  }
+    if ($use_nrpe == true) {
+	include nagios::command::nrpe_timeout
 
-  if $ensure != 'absent' {
-    if $check_comand == 'absent' {
-      fail("Must pass a check_command to ${name} if it should be present")
+        if ($nrpe_args != '') { 
+	    $real_check_command = "check_nrpe_timeout!$nrpe_timeout!$check_command!\"$nrpe_args\"" 
+	}
+	else { 
+	    $real_check_command = "check_nrpe_1arg_timeout!$nrpe_timeout!$check_command" 
+	}
     }
     if ($use_nrpe == 'true') {
 	    include nagios::command::nrpe_timeout
@@ -83,6 +84,7 @@ define nagios::service (
     if ($contact_groups != '') {
       Nagios_service["${real_name}"] { contact_groups => $contact_groups }
     }
-  }
+    
+    #if ($nrpe_timeout != '') {
 }
 
