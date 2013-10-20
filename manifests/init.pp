@@ -15,43 +15,28 @@
 #
 
 # manage nagios
-class nagios(
-  $httpd = 'apache',
-  $allow_external_cmd = false,
-  $manage_shorewall = false,
-  $manage_munin = false
-) {
+class nagios {
   case $nagios::httpd {
     'absent': { }
     'lighttpd': { include ::lighttpd }
     'apache': { include ::apache }
     default: { include ::apache }
   }
-  case $::operatingsystem {
+  case $operatingsystem {
     'centos': {
-      $cfgdir = '/etc/nagios'
+      $nagios_cfgdir = '/etc/nagios'
       include nagios::centos
     }
-    case $operatingsystem {
-        'centos': {
-             $nagios_cfgdir = '/etc/nagios'
-            include nagios::centos
-        }
-        'Ubuntu', 'debian': {
-            $nagios_packagename = $nagios_use_icinga ? {
-                true => icinga,
-                default => nagios3
-            }
+    'Ubuntu', 'debian': {
+      $nagios_packagename = $nagios_use_icinga ? {
+        true => icinga,
+        default => nagios3
+      }
 
-            $nagios_cfgdir = "/etc/$nagios_packagename"
+      $nagios_cfgdir = "/etc/$nagios_packagename"
 
-            include nagios::debian
-        }
-        default: { fail("No such operatingsystem: $operatingsystem yet defined") }
+      include nagios::debian
     }
-    default: { fail("No such operatingsystem: ${::operatingsystem} yet defined") }
-  }
-  if $manage_munin {
-    include nagios::munin
+    default: { fail("No such operatingsystem: $operatingsystem yet defined") }
   }
 }
