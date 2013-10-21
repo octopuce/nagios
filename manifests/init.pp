@@ -16,7 +16,7 @@
 
 # manage nagios
 class nagios {
-  case $nagios::httpd {
+  case $nagios_httpd {
     'absent': { }
     'lighttpd': { include ::lighttpd }
     'apache': { include ::apache }
