@@ -12,13 +12,13 @@ class nagios::pnp4nagios {
  
     file { 'pnp4nagios-templates.cfg':
          path => "$nagios::nagios_cfgdir/conf.d/pnp4nagios-templates.cfg",
-         source => [ "puppet:///modules/site-nagios/pnp4nagios/pnp4nagios-templates.cfg",
+         source => [ "puppet:///modules/site_nagios/pnp4nagios/pnp4nagios-templates.cfg",
                      "puppet:///modules/nagios/pnp4nagios/pnp4nagios-templates.cfg"    ]
     }
     
     file { 'apache.conf':
         path => "/etc/pnp4nagios/apache.conf",
-        source => [ "puppet:///modules/site-nagios/pnp4nagios/apache.conf",
+        source => [ "puppet:///modules/site_nagios/pnp4nagios/apache.conf",
     		        "puppet:///modules/nagios/pnp4nagios/apache.conf"    	
     	      ],
 	notify => Service['apache'],
