@@ -2,10 +2,20 @@ define nagios::plugin(
     $source = 'absent',
     $ensure = present
 ){
-  file{$name:
+   case $operatingsystem {
+    'Ubuntu', 'debian': {
+        $libdir32="/usr/lib32"
+	$libdir64="/usr/lib"
+    }
+    default: {
+	$libdir32="/usr/lib"
+	$libdir64="/usr/lib64"
+    }
+  } 
+   file{$name:
     path => $::hardwaremodel ? {
-      'x86_64' => "/usr/lib64/nagios/plugins/${name}",
-      default => "/usr/lib/nagios/plugins/${name}",
+      'x86_64' => "${libdir64}/nagios/plugins/${name}",
+      default => "${libdir32}/nagios/plugins/${name}",
     },
     ensure => $ensure,
     source => $source ? {
@@ -17,3 +27,6 @@ define nagios::plugin(
     owner => root, group => 0, mode => 0755;
   }
 }
+
+
+
