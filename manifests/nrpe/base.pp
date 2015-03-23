@@ -4,8 +4,9 @@ class nagios::nrpe::base {
     if $processorcount == '' { $processorcount = 1 }
     
     package {   "nagios-nrpe-server": ensure => present;
-        "nagios-plugins-basic": ensure => present;
-        "libwww-perl": ensure => present;   # for check_apache
+        "nagios-plugins-basic": ensure => present;}
+	if(  ! defined( Package["libwww-perl"] ) ){ 
+	package { "libwww-perl": ensure => present}   # for check_apache
       }
 
     # Special-case lenny. the package doesn't exist
@@ -15,7 +16,7 @@ class nagios::nrpe::base {
     
     file { [ $nagios_nrpe_cfgdir, "$nagios_nrpe_cfgdir/nrpe.d" ]: 
   ensure => directory }
-
+    
     if $nagios_nrpe_dont_blame == '' { $nagios_nrpe_dont_blame = 1 }
     file { "$nagios_nrpe_cfgdir/nrpe.cfg":
       content => template('nagios/nrpe/nrpe.cfg'),
