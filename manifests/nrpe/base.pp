@@ -24,11 +24,11 @@ class nagios::nrpe::base {
     }
     
     # default commands
-    nagios::nrpe::command { "basic_nrpe":
-        source => [ "puppet:///modules/site_nagios/nrpe/nrpe_commands.${fqdn}.cfg",
-                    "puppet:///modules/site_nagios/nrpe/nrpe_commands.cfg",
-                    "puppet:///modules/nagios/nrpe/nrpe_commands.cfg" ],
-   }
+#    nagios::nrpe::command { "basic_nrpe":
+#        source => [ "puppet:///modules/site_nagios/nrpe/nrpe_commands.${fqdn}.cfg",
+#                    "puppet:///modules/site_nagios/nrpe/nrpe_commands.cfg",
+#                    "puppet:///modules/nagios/nrpe/nrpe_commands.cfg" ],
+#   }
     # the check for load should be customized for each server based on number
     # of CPUs and the type of activity.
     $warning_1_threshold = 7 * $processorcount
