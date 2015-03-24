@@ -14,8 +14,17 @@ class nagios::nrpe::base {
         package { "libnagios-plugin-perl": ensure => present; }
     }
     
-    file { [ $nagios_nrpe_cfgdir, "$nagios_nrpe_cfgdir/nrpe.d" ]: 
-  ensure => directory }
+    file { "$nagios_nrpe_cfgdir": 
+      ensure => directory;
+    }
+    file { "$nagios_nrpe_cfgdir/nrpe.d": 
+      ensure => directory,
+      mode    => 655, owner   => root, group   => root,
+      recurse => true,   # enable recursive directory management
+      purge => true,   # purge all unmanaged junk
+      force => true,   # also purge subdirs and links etc.
+      notify => Service['nagios-nrpe-server'];
+    }
     
     if $nagios_nrpe_dont_blame == '' { $nagios_nrpe_dont_blame = 1 }
     file { "$nagios_nrpe_cfgdir/nrpe.cfg":
