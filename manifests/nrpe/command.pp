@@ -26,13 +26,11 @@ define nagios::nrpe::command (
         '': {
              File["$nagios_nrpe_cfgdir/nrpe.d/${name}_command.cfg"] {
                 content => template( "nagios/nrpe/nrpe_command.erb" ),
-		require => [ Class["nagios::nrpe::base"] ]
             }
         }
         default: {
             File["$nagios_nrpe_cfgdir/nrpe.d/${name}_command.cfg"] {
                 source => $source,
-		require => [ Class["nagios::nrpe::base"] ]
             }
         }
     }
