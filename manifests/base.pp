@@ -123,7 +123,6 @@ class nagios::base {
         notify => Service['nagios'],
     }
     Nagios_service <||> {
-        target => "${nagios::defaults::vars::int_cfgdir}/conf.d/nagios_service.cfg",
         require => File['nagios_confd'],
         notify => Service['nagios'],
     }
