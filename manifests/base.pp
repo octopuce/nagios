@@ -64,25 +64,10 @@ class nagios::base {
     file { 'nagios_confd':
         path => "${nagios::defaults::vars::int_cfgdir}/conf.d/",
         ensure => directory,
-        purge => true,
         recurse => true,
         notify => Service['nagios'],
-        mode => '0750', owner => root, group => nagios;
+        mode => '0755', owner => root, group => nagios;
     }
-    Nagios_command <<||>>
-    Nagios_contactgroup <<||>>
-    Nagios_contact <<||>>
-    Nagios_hostdependency <<||>>
-    Nagios_hostescalation <<||>>
-    Nagios_hostextinfo <<||>>
-    Nagios_hostgroup <<||>>
-    Nagios_host <<||>>
-    Nagios_servicedependency <<||>>
-    Nagios_serviceescalation <<||>>
-    Nagios_servicegroup <<||>>
-    Nagios_serviceextinfo <<||>>
-    Nagios_service <<||>>
-    Nagios_timeperiod <<||>>
 
     Nagios_command <||> {
         target => "${nagios::defaults::vars::int_cfgdir}/conf.d/nagios_command.cfg",
@@ -123,7 +108,6 @@ class nagios::base {
         notify => Service['nagios'],
     }
     Nagios_service <||> {
-        target => "${nagios::defaults::vars::int_cfgdir}/conf.d/nagios_service.cfg",
         require => File['nagios_confd'],
         notify => Service['nagios'],
     }

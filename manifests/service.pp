@@ -44,7 +44,8 @@ define nagios::service (
         service_description => $service_description ?{
           'absent' => $name,
           default => $service_description
-        }
+        },
+        target  => "/etc/nagios3/conf.d/${fqdn}.cfg"
     }
 
     if ($check_period != '') {
