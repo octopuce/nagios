@@ -3,6 +3,7 @@ define nagios::service (
     $host_name = $fqdn,
     $check_command,
     $check_period = '',
+    $event_handler = '',
     $normal_check_interval = '',
     $retry_check_interval = '',
     $max_check_attempts = '',
@@ -80,6 +81,11 @@ define nagios::service (
         Nagios_service["${real_name}"] { contact_groups => $contact_groups }
     }
     
+    if ($event_handler != '') {
+        Nagios_service["${real_name}"] { event_handler => $event_handler }
+    }
+    
     #if ($nrpe_timeout != '') {
+
 }
 
