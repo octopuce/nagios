@@ -20,7 +20,7 @@ class nagios::nrpe::base {
     }
     file { "$nagios_nrpe_cfgdir/nrpe.d": 
       ensure => directory,
-      mode    => 655, owner   => root, group   => root,
+      mode    => "655", owner   => root, group   => root,
       recurse => true,   # enable recursive directory management
       purge => true,   # purge all unmanaged junk
       force => true,   # also purge subdirs and links etc.
@@ -30,7 +30,7 @@ class nagios::nrpe::base {
     if $nagios_nrpe_dont_blame == '' { $nagios_nrpe_dont_blame = 1 }
     file { "$nagios_nrpe_cfgdir/nrpe.cfg":
       content => template('nagios/nrpe/nrpe.cfg'),
-      owner => root, group => 0, mode => 644;
+      owner => root, group => 0, mode => "644";
     }
     
     # default commands
