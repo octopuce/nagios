@@ -1,4 +1,4 @@
-class nagios::nrpe::base {
+class nagios::nrpe::base inherits nagios::nrpe {
 
     if $nagios_nrpe_cfgdir == undef { $nagios_nrpe_cfgdir = '/etc/nagios' }
     if $nagios_nrpe_cfgdir == '' { $nagios_nrpe_cfgdir = '/etc/nagios' }
