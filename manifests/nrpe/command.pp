@@ -4,7 +4,9 @@ define nagios::nrpe::command (
     $source = '' )
 {
 
+  if (!defined(Class["nagios::nrpe::base"])) {
     require nagios::nrpe::base
+  }
     
     if ($command_line == '' and $source == '') {
         fail ( "Either one of 'command_line' or 'source' must be given to nagios::nrpe::command." )
