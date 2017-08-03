@@ -1,4 +1,7 @@
-class nagios::nrpe {
+class nagios::nrpe (
+  $server_address = '127.0.0.1',
+  $allowed_hosts  = '127.0.0.1',
+) {
     case $operatingsystem {
         'FreeBSD': {
             if $nagios_nrpe_cfgdir == undef { $nagios_nrpe_cfgdir = '/usr/local/etc' }
