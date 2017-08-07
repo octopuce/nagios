@@ -15,8 +15,10 @@
 #
 
 # manage nagios
-class nagios {
-  case $nagios_httpd {
+class nagios (
+  $httpd = 'apache',
+) {
+  case $httpd {
     'absent': { }
     'lighttpd': { include ::lighttpd }
     'apache': { include ::apache }
