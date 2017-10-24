@@ -3,8 +3,7 @@ class nagios::nrpe::base inherits nagios::nrpe {
     $nagios_nrpe_server_address = $nagios::nrpe::server_address
     $nagios_nrpe_allowed_hosts = $nagios::nrpe::allowed_hosts
 
-    if $nagios_nrpe_cfgdir == undef { $nagios_nrpe_cfgdir = '/etc/nagios' }
-    if $nagios_nrpe_cfgdir == '' { $nagios_nrpe_cfgdir = '/etc/nagios' }
+    $nagios_nrpe_cfgdir = '/etc/nagios'
     if $processorcount == undef { $processorcount = 1 }
     
     package {   "nagios-nrpe-server": ensure => present;
