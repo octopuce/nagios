@@ -29,7 +29,6 @@ class nagios::nrpe::base inherits nagios::nrpe {
       notify => Service['nagios-nrpe-server'];
     }
     
-    if $nagios_nrpe_dont_blame == '' { $nagios_nrpe_dont_blame = 1 }
     file { "$nagios_nrpe_cfgdir/nrpe.cfg":
       content => template('nagios/nrpe/nrpe.cfg'),
       owner => root, group => 0, mode => "644";
