@@ -1,4 +1,6 @@
-class nagios::nrpe::freebsd inherits nagios::nrpe::base {
+class nagios::nrpe::freebsd {
+
+  include nagios::nrpe::base
 
     Package["nagios-nrpe-server"] { name => "nrpe" }
     Package["nagios-plugins-basic"] { name => "nagios-plugins" }

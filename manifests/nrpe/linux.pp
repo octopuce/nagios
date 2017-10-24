@@ -1,4 +1,6 @@
-class nagios::nrpe::linux inherits nagios::nrpe::base {
+class nagios::nrpe::linux {
+
+  include nagios::nrpe::base
 
   if $lsbdistcodename == "jessie" {
     
