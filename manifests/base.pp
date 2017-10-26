@@ -75,12 +75,12 @@ class nagios::base {
     Nagios_hostescalation <<||>>
     Nagios_hostextinfo <<||>>
     Nagios_hostgroup <<||>>
-    Nagios_host <<||>>
+#    Nagios_host <<||>>
     Nagios_servicedependency <<||>>
     Nagios_serviceescalation <<||>>
     Nagios_servicegroup <<||>>
     Nagios_serviceextinfo <<||>>
-    Nagios_service <<||>>
+#    Nagios_service <<||>>
     Nagios_timeperiod <<||>>
 
     Nagios_command <||> {
