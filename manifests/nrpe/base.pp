@@ -1,7 +1,11 @@
-class nagios::nrpe::base inherits nagios::nrpe {
+class nagios::nrpe::base {
+
+    include nagios::nrpe
 
     $nagios_nrpe_server_address = $nagios::nrpe::server_address
     $nagios_nrpe_allowed_hosts = $nagios::nrpe::allowed_hosts
+    $nagios_nrpe_pid_file = $nagios::nrpe::nagios_nrpe_pid_file
+    $nagios_plugin_dir = $nagios::nrpe::nagios_plugin_dir
 
     $nagios_nrpe_cfgdir = '/etc/nagios'
     if $processorcount == undef { $processorcount = 1 }
